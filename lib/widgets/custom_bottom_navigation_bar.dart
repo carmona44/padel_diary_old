@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:padel_diary/providers/ui_provider.dart';
+import 'package:provider/provider.dart';
 
 class CustomBottomNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final uiProvider = Provider.of<UiProvider>(context);
+    final _currentIndex = uiProvider.selectedTabIndex;
+
     return BottomNavigationBar(
-      currentIndex: 2,
+      currentIndex: _currentIndex,
       elevation: 0,
       selectedItemColor: Colors.amber,
       unselectedItemColor: Colors.grey,
@@ -26,6 +31,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
           label: 'Rankings',
         ),
       ],
+      onTap: (int tabIndex) => uiProvider.selectedTabIndex = tabIndex,
     );
   }
 }
