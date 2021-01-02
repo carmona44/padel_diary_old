@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:padel_diary/models/player_model.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
@@ -59,7 +60,7 @@ class DBProvider {
             temperature INTEGER,
             mvp INTEGER,
             duration INTEGER,
-            ball INTEGER
+            ball INTEGER,
             FOREIGN KEY (teamA_left) REFERENCES players (player_id) ON DELETE CASCADE ON UPDATE NO ACTION,
             FOREIGN KEY (teamA_right) REFERENCES players (player_id) ON DELETE CASCADE ON UPDATE NO ACTION,
             FOREIGN KEY (teamB_left) REFERENCES players (player_id) ON DELETE CASCADE ON UPDATE NO ACTION,
@@ -99,7 +100,9 @@ class DBProvider {
     });
   }
 
-  /*addPlayer(PlayerModel newPlayer) async {
-
-  }*/
+  Future<int> addPlayer(Player newPlayer) async {
+    final db = await database;
+    final res = db.insert('players', newPlayer.toJson());
+    return res;
+  }
 }
