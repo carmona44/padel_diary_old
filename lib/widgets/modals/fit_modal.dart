@@ -13,28 +13,31 @@ class ModalFit extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           ListTile(
-            title: Text('Edit'),
-            leading: Icon(Icons.edit),
+            title: Text('Añadir:'),
+          ),
+          ListTile(
+            title: Text('Bolas'),
+            leading: Icon(Icons.sports_baseball),
             onTap: () => Navigator.of(context).pop(),
           ),
           ListTile(
-            title: Text('Copy'),
-            leading: Icon(Icons.content_copy),
+            title: Text('Club'),
+            leading: Icon(Icons.home),
             onTap: () => Navigator.of(context).pop(),
           ),
           ListTile(
-            title: Text('Cut'),
-            leading: Icon(Icons.content_cut),
+            title: Text('Partido'),
+            leading: Icon(Icons.sports_tennis),
             onTap: () => Navigator.of(context).pop(),
           ),
           ListTile(
-            title: Text('Move'),
-            leading: Icon(Icons.folder_open),
+            title: Text('Torneo'),
+            leading: Icon(Icons.emoji_events),
             onTap: () => Navigator.of(context).pop(),
           ),
           ListTile(
-            title: Text('Delete'),
-            leading: Icon(Icons.delete),
+            title: Text('Jugador'),
+            leading: Icon(Icons.emoji_people),
             onTap: () => Navigator.of(context).pop(),
           )
         ],
