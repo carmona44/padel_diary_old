@@ -18,27 +18,27 @@ class ModalFit extends StatelessWidget {
           ListTile(
             title: Text('Bolas'),
             leading: Icon(Icons.sports_baseball),
-            onTap: () => Navigator.of(context).pop(),
+            onTap: () => Navigator.pushNamed(context, 'balls-form'),
           ),
           ListTile(
             title: Text('Club'),
             leading: Icon(Icons.home),
-            onTap: () => Navigator.of(context).pop(),
+            onTap: () => Navigator.pushNamed(context, 'club-form'),
           ),
           ListTile(
             title: Text('Partido'),
             leading: Icon(Icons.sports_tennis),
-            onTap: () => Navigator.of(context).pop(),
+            onTap: () => Navigator.pushNamed(context, 'match-form'),
           ),
           ListTile(
             title: Text('Torneo'),
             leading: Icon(Icons.emoji_events),
-            onTap: () => Navigator.of(context).pop(),
+            onTap: () => Navigator.pushNamed(context, 'tournament-form'),
           ),
           ListTile(
             title: Text('Jugador'),
             leading: Icon(Icons.emoji_people),
-            onTap: () => Navigator.of(context).pop(),
+            onTap: () => Navigator.pushNamed(context, 'player-form'),
           )
         ],
       ),
