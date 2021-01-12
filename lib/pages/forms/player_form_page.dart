@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:padel_diary/models/player_model.dart';
 
 class PlayerFormPage extends StatefulWidget {
   @override
@@ -7,6 +8,7 @@ class PlayerFormPage extends StatefulWidget {
 
 class _PlayerFormPageState extends State<PlayerFormPage> {
   final formKey = GlobalKey<FormState>();
+  Player playerModel = Player();
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +32,7 @@ class _PlayerFormPageState extends State<PlayerFormPage> {
                 _avatarInput(),
                 _countryInput(),
                 _regionInput(),
-                _favouriteHintInput(),
+                _favouriteHitInput(),
                 _racketInput(),
                 SizedBox(height: 25.0),
                 _submitButton()
@@ -48,6 +50,7 @@ class _PlayerFormPageState extends State<PlayerFormPage> {
       decoration: InputDecoration(labelText: 'Nombre'),
       validator: (value) =>
           value.length < 1 ? 'El nombre del jugador es obligatorio' : null,
+      onSaved: (value) => playerModel.name = value,
     );
   }
 
@@ -55,17 +58,28 @@ class _PlayerFormPageState extends State<PlayerFormPage> {
     return TextFormField(
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(labelText: 'Apellidos'),
+      onSaved: (value) => playerModel.surname = value,
     );
   }
 
   Widget _positionInput() {
     final _dropdownItems = [
-      DropdownMenuItem(child: Text('Revés / Izquierda')),
-      DropdownMenuItem(child: Text('Drive / Derecha'))
+      DropdownMenuItem(
+        child: Text('Revés / Izquierda'),
+        value: 'Revés / Izquierda',
+      ),
+      DropdownMenuItem(
+        child: Text('Drive / Derecha'),
+        value: 'Drive / Derecha',
+      )
     ];
     return DropdownButtonFormField(
+      hint: Text('Posición preferida'),
       items: _dropdownItems,
-      onChanged: (value) => {},
+      onChanged: (value) => setState(() {
+        playerModel.position = value;
+      }),
+      onSaved: (value) => playerModel.position = value,
     );
   }
 
@@ -73,6 +87,7 @@ class _PlayerFormPageState extends State<PlayerFormPage> {
     return TextFormField(
       keyboardType: TextInputType.number,
       decoration: InputDecoration(labelText: 'Edad'),
+      onSaved: (value) => playerModel.age = int.tryParse(value),
     );
   }
 
@@ -80,6 +95,7 @@ class _PlayerFormPageState extends State<PlayerFormPage> {
     return TextFormField(
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(labelText: 'Nivel'),
+      onSaved: (value) => playerModel.level = int.tryParse(value),
     );
   }
 
@@ -87,6 +103,7 @@ class _PlayerFormPageState extends State<PlayerFormPage> {
     return TextFormField(
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(labelText: 'Mano dominante'),
+      onSaved: (value) => playerModel.dominantHand = value,
     );
   }
 
@@ -94,6 +111,7 @@ class _PlayerFormPageState extends State<PlayerFormPage> {
     return TextFormField(
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(labelText: 'Avatar'),
+      onSaved: (value) => playerModel.avatar = value,
     );
   }
 
@@ -101,6 +119,7 @@ class _PlayerFormPageState extends State<PlayerFormPage> {
     return TextFormField(
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(labelText: 'País'),
+      onSaved: (value) => playerModel.country = value,
     );
   }
 
@@ -108,13 +127,15 @@ class _PlayerFormPageState extends State<PlayerFormPage> {
     return TextFormField(
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(labelText: 'Región'),
+      onSaved: (value) => playerModel.region = value,
     );
   }
 
-  Widget _favouriteHintInput() {
+  Widget _favouriteHitInput() {
     return TextFormField(
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(labelText: 'Golpe estrella'),
+      onSaved: (value) => playerModel.favouriteHit = value,
     );
   }
 
@@ -122,6 +143,7 @@ class _PlayerFormPageState extends State<PlayerFormPage> {
     return TextFormField(
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(labelText: 'Pala'),
+      onSaved: (value) => playerModel.racket = value,
     );
   }
 
@@ -136,5 +158,12 @@ class _PlayerFormPageState extends State<PlayerFormPage> {
 
   void _submit() {
     if (!formKey.currentState.validate()) return;
+
+    formKey.currentState.save();
+
+    print(playerModel.name);
+    print(playerModel.surname);
+    print(playerModel.position);
+    print(playerModel.age);
   }
 }

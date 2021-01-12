@@ -16,7 +16,7 @@ class Player {
     this.avatar,
     this.country,
     this.region,
-    this.favouriteHint,
+    this.favouriteHit,
     this.racket,
   });
 
@@ -30,7 +30,7 @@ class Player {
   String avatar;
   String country;
   String region;
-  String favouriteHint;
+  String favouriteHit;
   String racket;
 
   factory Player.fromJson(Map<String, dynamic> json) => Player(
@@ -44,7 +44,7 @@ class Player {
         avatar: json["avatar"],
         country: json["country"],
         region: json["region"],
-        favouriteHint: json["favourite_hint"],
+        favouriteHit: json["favourite_hit"],
         racket: json["racket"],
       );
 
@@ -59,7 +59,7 @@ class Player {
         "avatar": avatar,
         "country": country,
         "region": region,
-        "favourite_hint": favouriteHint,
+        "favourite_hit": favouriteHit,
         "racket": racket,
       };
 }
