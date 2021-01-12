@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
 
-class PlayerFormPage extends StatelessWidget {
+class PlayerFormPage extends StatefulWidget {
+  @override
+  _PlayerFormPageState createState() => _PlayerFormPageState();
+}
+
+class _PlayerFormPageState extends State<PlayerFormPage> {
+  final formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -11,6 +18,7 @@ class PlayerFormPage extends StatelessWidget {
         child: Container(
           padding: EdgeInsets.all(15.0),
           child: Form(
+            key: formKey,
             child: Column(
               children: [
                 _nameInput(),
@@ -24,6 +32,7 @@ class PlayerFormPage extends StatelessWidget {
                 _regionInput(),
                 _favouriteHintInput(),
                 _racketInput(),
+                SizedBox(height: 25.0),
                 _submitButton()
               ],
             ),
@@ -37,6 +46,8 @@ class PlayerFormPage extends StatelessWidget {
     return TextFormField(
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(labelText: 'Nombre'),
+      validator: (value) =>
+          value.length < 1 ? 'El nombre del jugador es obligatorio' : null,
     );
   }
 
@@ -52,9 +63,7 @@ class PlayerFormPage extends StatelessWidget {
       DropdownMenuItem(child: Text('Revés / Izquierda')),
       DropdownMenuItem(child: Text('Drive / Derecha'))
     ];
-
     return DropdownButtonFormField(
-      value: 0,
       items: _dropdownItems,
       onChanged: (value) => {},
     );
@@ -121,7 +130,11 @@ class PlayerFormPage extends StatelessWidget {
       icon: Icon(Icons.save),
       label: Text('Crear jugador'),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-      onPressed: () {},
+      onPressed: _submit,
     );
+  }
+
+  void _submit() {
+    if (!formKey.currentState.validate()) return;
   }
 }
