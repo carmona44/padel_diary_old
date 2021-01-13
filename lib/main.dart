@@ -5,6 +5,7 @@ import 'package:padel_diary/pages/forms/match_form_page.dart';
 import 'package:padel_diary/pages/forms/player_form_page.dart';
 import 'package:padel_diary/pages/forms/tournament_form_page.dart';
 import 'package:padel_diary/pages/home_page.dart';
+import 'package:padel_diary/providers/player_provider.dart';
 import 'package:padel_diary/providers/ui_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -16,6 +17,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => UiProvider()),
+        ChangeNotifierProvider(create: (_) => PlayerProvider()),
       ],
       child: MaterialApp(
         title: 'Diario de pádel',

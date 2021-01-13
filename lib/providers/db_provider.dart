@@ -100,9 +100,18 @@ class DBProvider {
     });
   }
 
-  Future<int> addPlayer(Player newPlayer) async {
+  Future<int> createPlayer(Player newPlayer) async {
     final db = await database;
     final res = db.insert('players', newPlayer.toJson());
     return res;
+  }
+
+  Future<List<Player>> getAllPlayers() async {
+    final db = await database;
+    final res = await db.query('players');
+
+    return res.isNotEmpty
+        ? res.map((player) => Player.fromJson(player)).toList()
+        : null;
   }
 }
