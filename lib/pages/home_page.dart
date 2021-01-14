@@ -3,6 +3,7 @@ import 'package:padel_diary/pages/matches_page.dart';
 import 'package:padel_diary/pages/profile_page.dart';
 import 'package:padel_diary/pages/rankings_page.dart';
 import 'package:padel_diary/pages/stats_page.dart';
+import 'package:padel_diary/providers/player_provider.dart';
 import 'package:padel_diary/providers/ui_provider.dart';
 import 'package:padel_diary/widgets/add_floating_button.dart';
 import 'package:padel_diary/widgets/custom_bottom_navigation_bar.dart';
@@ -29,6 +30,9 @@ class _HomePageBody extends StatelessWidget {
   Widget build(BuildContext context) {
     final uiProvider = Provider.of<UiProvider>(context);
     final _selectedTabIndex = uiProvider.selectedTabIndex;
+
+    final playerProvider = Provider.of<PlayerProvider>(context, listen: false);
+    playerProvider.getAllPlayers();
 
     switch (_selectedTabIndex) {
       case 0:

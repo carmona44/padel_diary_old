@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:padel_diary/models/player_model.dart';
+import 'package:padel_diary/providers/player_provider.dart';
+import 'package:provider/provider.dart';
 
 class PlayerFormPage extends StatefulWidget {
   @override
@@ -161,9 +163,12 @@ class _PlayerFormPageState extends State<PlayerFormPage> {
 
     formKey.currentState.save();
 
-    print(playerModel.name);
-    print(playerModel.surname);
-    print(playerModel.position);
-    print(playerModel.age);
+    final playerProvider = Provider.of<PlayerProvider>(context, listen: false);
+    playerProvider.createPlayer(playerModel);
+
+    formKey.currentState.reset();
+    setState(() {
+      playerModel = Player();
+    });
   }
 }
