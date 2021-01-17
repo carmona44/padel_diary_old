@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:padel_diary/models/match_model.dart';
 import 'package:padel_diary/models/player_model.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
@@ -100,6 +101,10 @@ class DBProvider {
     });
   }
 
+  //-----------------------------------------------
+  //----------- JUGADORES -------------------------
+  //-----------------------------------------------
+
   Future<int> createPlayer(Player newPlayer) async {
     final db = await database;
     final res = db.insert('players', newPlayer.toJson());
@@ -112,6 +117,25 @@ class DBProvider {
 
     return res.isNotEmpty
         ? res.map((player) => Player.fromJson(player)).toList()
+        : null;
+  }
+
+  //-----------------------------------------------
+  //----------- PARTIDOS --------------------------
+  //-----------------------------------------------
+
+  Future<int> createMatch(Match newMatch) async {
+    final db = await database;
+    final res = db.insert('matches', newMatch.toJson());
+    return res;
+  }
+
+  Future<List<Match>> getAllMatches() async {
+    final db = await database;
+    final res = await db.query('matches');
+
+    return res.isNotEmpty
+        ? res.map((match) => Match.fromJson(match)).toList()
         : null;
   }
 }
