@@ -13,7 +13,7 @@ class FloatingModal extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20),
+        padding: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 20.0),
         child: Material(
           color: backgroundColor,
           clipBehavior: Clip.antiAlias,
