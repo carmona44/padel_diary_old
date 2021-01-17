@@ -15,7 +15,7 @@ class ModalFit extends StatelessWidget {
           ListTile(
             title: Text('Añadir:'),
           ),
-          ListTile(
+          /*ListTile(
             title: Text('Bolas'),
             leading: Icon(Icons.sports_baseball),
             onTap: () => Navigator.pushNamed(context, 'balls-form'),
@@ -24,17 +24,17 @@ class ModalFit extends StatelessWidget {
             title: Text('Club'),
             leading: Icon(Icons.home),
             onTap: () => Navigator.pushNamed(context, 'club-form'),
-          ),
+          ),*/
           ListTile(
             title: Text('Partido'),
             leading: Icon(Icons.sports_tennis),
             onTap: () => Navigator.pushNamed(context, 'match-form'),
           ),
-          ListTile(
+          /*ListTile(
             title: Text('Torneo'),
             leading: Icon(Icons.emoji_events),
             onTap: () => Navigator.pushNamed(context, 'tournament-form'),
-          ),
+          ),*/
           ListTile(
             title: Text('Jugador'),
             leading: Icon(Icons.emoji_people),

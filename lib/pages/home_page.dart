@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:padel_diary/pages/matches_page.dart';
 import 'package:padel_diary/pages/profile_page.dart';
-import 'package:padel_diary/pages/rankings_page.dart';
-import 'package:padel_diary/pages/stats_page.dart';
+//import 'package:padel_diary/pages/rankings_page.dart';
+//import 'package:padel_diary/pages/stats_page.dart';
 import 'package:padel_diary/providers/player_provider.dart';
 import 'package:padel_diary/providers/ui_provider.dart';
 import 'package:padel_diary/widgets/add_floating_button.dart';
@@ -39,17 +39,17 @@ class _HomePageBody extends StatelessWidget {
         return ProfilePage();
         break;
 
-      case 1:
+      /*case 1:
         return StatsPage();
-        break;
+        break;*/
 
       case 2:
         return MatchesPage();
         break;
 
-      case 3:
+      /*case 3:
         return RankingsPage();
-        break;
+        break;*/
 
       default:
         return MatchesPage();

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:padel_diary/models/ball_model.dart';
-import 'package:padel_diary/models/club_model.dart';
 import 'package:padel_diary/models/player_model.dart';
-import 'package:padel_diary/models/tournament_model.dart';
 import 'package:padel_diary/providers/player_provider.dart';
 import 'package:provider/provider.dart';
+/*import 'package:padel_diary/models/club_model.dart';
+import 'package:padel_diary/models/tournament_model.dart';
+import 'package:padel_diary/models/ball_model.dart';*/
 
 class ProfilePage extends StatelessWidget {
   @override
@@ -15,9 +15,9 @@ class ProfilePage extends StatelessWidget {
     return ListView(
       children: [
         ..._playerList(players),
-        ..._clubList([]),
-        ..._tournamentList([]),
-        ..._ballList([]),
+        //..._clubList([]),
+        //..._tournamentList([]),
+        //..._ballList([]),
       ],
     );
   }
@@ -38,7 +38,7 @@ class ProfilePage extends StatelessWidget {
     return widgets;
   }
 
-  List<Widget> _clubList(List<Club> clubs) {
+  /*List<Widget> _clubList(List<Club> clubs) {
     List<Widget> widgets = [];
 
     widgets..add(ListTile(title: Text('Clubes')))..add(Divider());
@@ -84,5 +84,5 @@ class ProfilePage extends StatelessWidget {
     }
 
     return widgets;
-  }
+  }*/
 }
