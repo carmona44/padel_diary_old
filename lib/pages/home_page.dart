@@ -39,15 +39,15 @@ class _HomePageBody extends StatelessWidget {
         return ProfilePage();
         break;
 
-      /*case 1:
-        return StatsPage();
-        break;*/
-
-      case 2:
+      case 1:
         return MatchesPage();
         break;
 
-      /*case 3:
+      /*case 2:
+        return StatsPage();
+        break;
+
+      case 3:
         return RankingsPage();
         break;*/
 

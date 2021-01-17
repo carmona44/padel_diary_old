@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class UiProvider extends ChangeNotifier {
-  int _selectedTabIndex = 2;
+  int _selectedTabIndex = 1;
 
   int get selectedTabIndex {
     return this._selectedTabIndex;

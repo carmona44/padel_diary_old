@@ -21,15 +21,15 @@ class CustomBottomNavigationBar extends StatelessWidget {
             icon: Icon(Icons.account_circle),
             label: 'Perfil',
           ),
-          /*BottomNavigationBarItem(
-            icon: Icon(Icons.equalizer),
-            label: 'Estadísticas',
-          ),*/
           BottomNavigationBarItem(
             icon: Icon(Icons.sports_baseball),
             label: 'Partidos',
           ),
           /*BottomNavigationBarItem(
+            icon: Icon(Icons.equalizer),
+            label: 'Estadísticas',
+          ),
+          BottomNavigationBarItem(
             icon: Icon(Icons.format_list_numbered),
             label: 'Rankings',
           ),*/

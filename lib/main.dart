@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:padel_diary/pages/forms/balls_form_page.dart';
 import 'package:padel_diary/pages/forms/club_form_page.dart';
 import 'package:padel_diary/pages/forms/match_form_page.dart';
@@ -31,6 +32,15 @@ class MyApp extends StatelessWidget {
           'player-form': (BuildContext context) => PlayerFormPage(),
         },
         theme: ThemeData.dark(),
+        localizationsDelegates: [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: [
+          const Locale('en', 'US'),
+          const Locale('es', 'ES'),
+        ],
       ),
     );
   }
