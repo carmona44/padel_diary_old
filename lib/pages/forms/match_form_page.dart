@@ -77,9 +77,13 @@ class _MatchFormPageState extends State<MatchFormPage> {
     );
 
     if (picked != null) {
+      final String pickedDate = picked.toString().split(' ')[0];
+      final List<String> dateNumbers = pickedDate.split('-');
+      final String dateToPrint =
+          '${dateNumbers[2]}-${dateNumbers[1]}-${dateNumbers[0]}';
       setState(() {
         matchModel.date = picked.microsecondsSinceEpoch;
-        _dateController.text = picked.toString();
+        _dateController.text = dateToPrint;
       });
     }
   }
