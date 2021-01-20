@@ -10,11 +10,15 @@ class PlayerFormPage extends StatefulWidget {
 
 class _PlayerFormPageState extends State<PlayerFormPage> {
   final formKey = GlobalKey<FormState>();
+  final scaffoldKey = GlobalKey<ScaffoldState>();
+
   Player playerModel = Player();
+  bool _saving = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: scaffoldKey,
       appBar: AppBar(
         title: Text('Añadir jugador'),
       ),
@@ -154,21 +158,37 @@ class _PlayerFormPageState extends State<PlayerFormPage> {
       icon: Icon(Icons.save),
       label: Text('Crear jugador'),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-      onPressed: _submit,
+      onPressed: _saving ? null : _submit,
     );
   }
 
   void _submit() {
     if (!formKey.currentState.validate()) return;
 
+    setState(() {
+      _saving = true;
+    });
     formKey.currentState.save();
 
     final playerProvider = Provider.of<PlayerProvider>(context, listen: false);
     playerProvider.createPlayer(playerModel);
 
     formKey.currentState.reset();
+    showSnackbar('Jugador creado con éxito');
+
     setState(() {
+      _saving = false;
       playerModel = Player();
     });
+  }
+
+  void showSnackbar(String message) {
+    final snackbar = SnackBar(
+      content: Text(message),
+      duration: Duration(milliseconds: 3000),
+      backgroundColor: Colors.green,
+    );
+
+    scaffoldKey.currentState.showSnackBar(snackbar);
   }
 }
