@@ -124,11 +124,19 @@ class _PlayerFormPageState extends State<PlayerFormPage> {
   }
 
   Widget _dominantHandInput() {
+    //TODO: convertir a RadioListTile
     return TextFormField(
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(labelText: 'Mano dominante'),
       onSaved: (value) => playerModel.dominantHand = value,
     );
+
+    /*return RadioListTile(
+      value: 0,
+      groupValue: 1,
+      onChanged: (value) {},
+      title: Text('Mano dominante'),
+    );*/
   }
 
   /*Widget _avatarInput() {
@@ -156,6 +164,7 @@ class _PlayerFormPageState extends State<PlayerFormPage> {
   }
 
   Widget _favouriteHitInput() {
+    //TODO: convertir a DropDownButtonFormField
     return TextFormField(
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(labelText: 'Golpe estrella'),
@@ -190,7 +199,6 @@ class _PlayerFormPageState extends State<PlayerFormPage> {
     formKey.currentState.save();
 
     final playerProvider = Provider.of<PlayerProvider>(context, listen: false);
-    print(playerModel.level);
     playerProvider.createPlayer(playerModel);
 
     formKey.currentState.reset();
