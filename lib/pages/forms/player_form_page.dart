@@ -14,6 +14,7 @@ class _PlayerFormPageState extends State<PlayerFormPage> {
 
   Player playerModel = Player();
   bool _saving = false;
+  double _sliderValue = 5.0;
 
   @override
   Widget build(BuildContext context) {
@@ -33,13 +34,13 @@ class _PlayerFormPageState extends State<PlayerFormPage> {
                 _surnameInput(),
                 _positionInput(),
                 _ageInput(),
-                _levelInput(),
                 _dominantHandInput(),
-                _avatarInput(),
+                //_avatarInput(),
                 _countryInput(),
                 _regionInput(),
                 _favouriteHitInput(),
                 _racketInput(),
+                _levelInput(),
                 SizedBox(height: 25.0),
                 _submitButton()
               ],
@@ -98,10 +99,27 @@ class _PlayerFormPageState extends State<PlayerFormPage> {
   }
 
   Widget _levelInput() {
-    return TextFormField(
-      textCapitalization: TextCapitalization.sentences,
-      decoration: InputDecoration(labelText: 'Nivel'),
-      onSaved: (value) => playerModel.level = int.tryParse(value),
+    final _labels = ['PRO', '1ª', '2ª', '3ª', '4ª', '5ª'];
+
+    return Row(
+      children: [
+        Text('Nivel'),
+        Expanded(
+          child: Slider(
+            value: _sliderValue,
+            min: 0.0,
+            max: 5.0,
+            divisions: 5,
+            label: _labels[_sliderValue.toInt()],
+            onChanged: (value) {
+              setState(() {
+                _sliderValue = value;
+                playerModel.level = value.toInt();
+              });
+            },
+          ),
+        ),
+      ],
     );
   }
 
@@ -113,13 +131,13 @@ class _PlayerFormPageState extends State<PlayerFormPage> {
     );
   }
 
-  Widget _avatarInput() {
+  /*Widget _avatarInput() {
     return TextFormField(
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(labelText: 'Avatar'),
       onSaved: (value) => playerModel.avatar = value,
     );
-  }
+  }*/
 
   Widget _countryInput() {
     return TextFormField(
@@ -166,11 +184,13 @@ class _PlayerFormPageState extends State<PlayerFormPage> {
     if (!formKey.currentState.validate()) return;
 
     setState(() {
+      if (playerModel.level == null) playerModel.level = 5;
       _saving = true;
     });
     formKey.currentState.save();
 
     final playerProvider = Provider.of<PlayerProvider>(context, listen: false);
+    print(playerModel.level);
     playerProvider.createPlayer(playerModel);
 
     formKey.currentState.reset();
