@@ -164,10 +164,23 @@ class _PlayerFormPageState extends State<PlayerFormPage> {
   }
 
   Widget _favouriteHitInput() {
-    //TODO: convertir a DropDownButtonFormField
-    return TextFormField(
-      textCapitalization: TextCapitalization.sentences,
-      decoration: InputDecoration(labelText: 'Golpe estrella'),
+    final _hits = ['Volea', 'Bandeja', 'Smash', 'Derecha', 'Revés', 'Saque'];
+    List<DropdownMenuItem> _dropdownItems = [];
+
+    _hits.forEach((hit) {
+      final _dropDownItem = DropdownMenuItem(
+        child: Text(hit),
+        value: hit,
+      );
+      _dropdownItems.add(_dropDownItem);
+    });
+
+    return DropdownButtonFormField(
+      hint: Text('Golpe estrella'),
+      items: _dropdownItems,
+      onChanged: (value) => setState(() {
+        playerModel.favouriteHit = value;
+      }),
       onSaved: (value) => playerModel.favouriteHit = value,
     );
   }
