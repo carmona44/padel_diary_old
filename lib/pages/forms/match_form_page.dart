@@ -43,10 +43,10 @@ class _MatchFormPageState extends State<MatchFormPage> {
                 //_inputTournament(),
                 //_inputBall(),
                 _dateInput(context),
-                _effortInput(),
-                //_temperatureInput(),
-                //_mvpInput(),
                 //_durationInput(),
+                _temperatureInput(),
+                _effortInput(),
+                //_mvpInput(),
                 _commentsInput(),
                 SizedBox(height: 25.0),
                 _submitButton()
@@ -97,10 +97,10 @@ class _MatchFormPageState extends State<MatchFormPage> {
         Expanded(
           child: Slider(
             value: _effortSliderValue,
-            min: 0.0,
+            min: 1.0,
             max: 10.0,
             label: _effortSliderValue.toInt().toString(),
-            divisions: 10,
+            divisions: 9,
             onChanged: (value) {
               setState(() {
                 _effortSliderValue = value;
@@ -110,6 +110,14 @@ class _MatchFormPageState extends State<MatchFormPage> {
           ),
         ),
       ],
+    );
+  }
+
+  Widget _temperatureInput() {
+    return TextFormField(
+      keyboardType: TextInputType.number,
+      decoration: InputDecoration(labelText: 'Temperatura ºC'),
+      onSaved: (value) => matchModel.temperature = int.tryParse(value),
     );
   }
 
