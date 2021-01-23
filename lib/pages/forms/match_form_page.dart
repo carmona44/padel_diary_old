@@ -44,8 +44,11 @@ class _MatchFormPageState extends State<MatchFormPage> {
                 //_inputClub(),
                 //_inputTournament(),
                 //_inputBall(),
-                _dateInput(context),
-                _durationInput(context),
+                Row(children: [
+                  Expanded(child: _dateInput(context)),
+                  SizedBox(width: 10.0),
+                  Expanded(child: _durationInput(context))
+                ]),
                 _temperatureInput(),
                 _effortInput(),
                 //_mvpInput(),
@@ -122,14 +125,14 @@ class _MatchFormPageState extends State<MatchFormPage> {
     );
 
     if (picked != null) {
-      final String pickedDate = picked.toString().split('.')[0];
-      final List<String> dateNumbers = pickedDate.split(':');
-      final String durationToPrint = '${dateNumbers[0]}:${dateNumbers[1]}';
-      final int minutes =
-          int.tryParse(dateNumbers[0]) * 60 + int.tryParse(dateNumbers[1]);
+      final String _pickedDate = picked.toString().split('.')[0];
+      final List<String> _dateNumbers = _pickedDate.split(':');
+      final String _durationToPrint = '${_dateNumbers[0]}:${_dateNumbers[1]}';
+      final int _minutes =
+          int.tryParse(_dateNumbers[0]) * 60 + int.tryParse(_dateNumbers[1]);
       setState(() {
-        matchModel.duration = minutes;
-        _durationController.text = durationToPrint;
+        matchModel.duration = _minutes;
+        _durationController.text = _durationToPrint;
       });
     }
   }
