@@ -14,6 +14,8 @@ class _MatchFormPageState extends State<MatchFormPage> {
 
   TextEditingController _dateController = new TextEditingController();
 
+  double _effortSliderValue = 5.0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,7 +43,7 @@ class _MatchFormPageState extends State<MatchFormPage> {
                 //_inputTournament(),
                 //_inputBall(),
                 _dateInput(context),
-                //_effortInput(),
+                _effortInput(),
                 //_commentsInput(),
                 //_temperatureInput(),
                 //_mvpInput(),
@@ -86,6 +88,29 @@ class _MatchFormPageState extends State<MatchFormPage> {
         _dateController.text = dateToPrint;
       });
     }
+  }
+
+  Widget _effortInput() {
+    return Row(
+      children: [
+        Text('Esfuerzo'),
+        Expanded(
+          child: Slider(
+            value: _effortSliderValue,
+            min: 0.0,
+            max: 10.0,
+            label: _effortSliderValue.toInt().toString(),
+            divisions: 10,
+            onChanged: (value) {
+              setState(() {
+                _effortSliderValue = value;
+                matchModel.effort = value.toInt();
+              });
+            },
+          ),
+        ),
+      ],
+    );
   }
 
   Widget _submitButton() {
