@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:padel_diary/models/match_model.dart';
 import 'package:padel_diary/providers/match_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_duration_picker/flutter_duration_picker.dart';
 
 class MatchFormPage extends StatefulWidget {
   @override
@@ -13,6 +14,7 @@ class _MatchFormPageState extends State<MatchFormPage> {
   Match matchModel = Match();
 
   TextEditingController _dateController = new TextEditingController();
+  TextEditingController _durationController = new TextEditingController();
 
   double _effortSliderValue = 5.0;
 
@@ -43,7 +45,7 @@ class _MatchFormPageState extends State<MatchFormPage> {
                 //_inputTournament(),
                 //_inputBall(),
                 _dateInput(context),
-                //_durationInput(),
+                _durationInput(context),
                 _temperatureInput(),
                 _effortInput(),
                 //_mvpInput(),
@@ -86,6 +88,48 @@ class _MatchFormPageState extends State<MatchFormPage> {
       setState(() {
         matchModel.date = picked.microsecondsSinceEpoch;
         _dateController.text = dateToPrint;
+      });
+    }
+  }
+
+  Widget _durationInput(BuildContext context) {
+    return Theme(
+      data: Theme.of(context).copyWith(
+          accentColor: Colors.blue,
+          textTheme: Theme.of(context).textTheme.apply(
+                bodyColor: Colors.grey,
+                displayColor: Colors.black,
+              )),
+      child: Builder(
+        builder: (context) => TextFormField(
+          enableInteractiveSelection: false,
+          controller: _durationController,
+          decoration:
+              InputDecoration(hintText: 'Duración', labelText: 'Duración'),
+          onTap: () {
+            FocusScope.of(context).requestFocus(new FocusNode());
+            _selectDuration(context);
+          },
+        ),
+      ),
+    );
+  }
+
+  _selectDuration(BuildContext context) async {
+    Duration picked = await showDurationPicker(
+      context: context,
+      initialTime: new Duration(hours: 1, minutes: 30),
+    );
+
+    if (picked != null) {
+      final String pickedDate = picked.toString().split('.')[0];
+      final List<String> dateNumbers = pickedDate.split(':');
+      final String durationToPrint = '${dateNumbers[0]}:${dateNumbers[1]}';
+      final int minutes =
+          int.tryParse(dateNumbers[0]) * 60 + int.tryParse(dateNumbers[1]);
+      setState(() {
+        matchModel.duration = minutes;
+        _durationController.text = durationToPrint;
       });
     }
   }
