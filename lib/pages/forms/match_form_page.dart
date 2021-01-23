@@ -44,10 +44,10 @@ class _MatchFormPageState extends State<MatchFormPage> {
                 //_inputBall(),
                 _dateInput(context),
                 _effortInput(),
-                //_commentsInput(),
                 //_temperatureInput(),
                 //_mvpInput(),
                 //_durationInput(),
+                _commentsInput(),
                 SizedBox(height: 25.0),
                 _submitButton()
               ],
@@ -110,6 +110,23 @@ class _MatchFormPageState extends State<MatchFormPage> {
           ),
         ),
       ],
+    );
+  }
+
+  Widget _commentsInput() {
+    return TextFormField(
+      textCapitalization: TextCapitalization.sentences,
+      keyboardType: TextInputType.multiline,
+      maxLines: 5,
+      decoration: InputDecoration(
+        border: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.grey, width: 1.0),
+        ),
+        labelText: 'Comentarios',
+        hintText:
+            '¿Cómo te has encontrado? ¿Te has entendido bien con tu pareja? ¿La meteorología ha sido dura?',
+      ),
+      onSaved: (value) => matchModel.comments = value,
     );
   }
 
