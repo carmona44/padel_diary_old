@@ -15,6 +15,7 @@ class _PlayerFormPageState extends State<PlayerFormPage> {
   Player playerModel = Player();
   bool _saving = false;
   double _sliderValue = 5.0;
+  int _dominantHand = 2;
 
   @override
   Widget build(BuildContext context) {
@@ -34,13 +35,13 @@ class _PlayerFormPageState extends State<PlayerFormPage> {
                 _surnameInput(),
                 _positionInput(),
                 _ageInput(),
-                _dominantHandInput(),
                 //_avatarInput(),
                 _countryInput(),
                 _regionInput(),
                 _favouriteHitInput(),
                 _racketInput(),
                 _levelInput(),
+                _dominantHandInput(),
                 SizedBox(height: 25.0),
                 _submitButton()
               ],
@@ -124,19 +125,37 @@ class _PlayerFormPageState extends State<PlayerFormPage> {
   }
 
   Widget _dominantHandInput() {
-    //TODO: convertir a RadioListTile
-    return TextFormField(
-      textCapitalization: TextCapitalization.sentences,
-      decoration: InputDecoration(labelText: 'Mano dominante'),
-      onSaved: (value) => playerModel.dominantHand = value,
+    final _leftOption = Radio(
+      value: 1,
+      groupValue: _dominantHand,
+      onChanged: (value) {
+        setState(() {
+          _dominantHand = value;
+          playerModel.dominantHand = 'zurdo';
+        });
+      },
     );
 
-    /*return RadioListTile(
-      value: 0,
-      groupValue: 1,
-      onChanged: (value) {},
-      title: Text('Mano dominante'),
-    );*/
+    final _rightOption = Radio(
+      value: 2,
+      groupValue: _dominantHand,
+      onChanged: (value) {
+        setState(() {
+          _dominantHand = value;
+          playerModel.dominantHand = 'diestro';
+        });
+      },
+    );
+
+    return Row(
+      children: [
+        _leftOption,
+        Text('Zurdo'),
+        _rightOption,
+        Text('Diestro'),
+      ],
+      mainAxisAlignment: MainAxisAlignment.center,
+    );
   }
 
   /*Widget _avatarInput() {
