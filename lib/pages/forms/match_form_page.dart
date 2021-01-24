@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:padel_diary/models/match_model.dart';
+import 'package:padel_diary/models/player_model.dart';
 import 'package:padel_diary/providers/match_provider.dart';
+import 'package:padel_diary/providers/player_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_duration_picker/flutter_duration_picker.dart';
 
@@ -17,9 +19,16 @@ class _MatchFormPageState extends State<MatchFormPage> {
   TextEditingController _durationController = new TextEditingController();
 
   double _effortSliderValue = 5.0;
+  List<Player> _restOfPlayers = [];
 
   @override
   Widget build(BuildContext context) {
+    final _playerProvider = Provider.of<PlayerProvider>(context);
+    final _players = _playerProvider.players;
+    setState(() {
+      _restOfPlayers = _players;
+    });
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Añadir nuevo partido'),
@@ -31,16 +40,24 @@ class _MatchFormPageState extends State<MatchFormPage> {
             key: formKey,
             child: Column(
               children: [
-                /*_inputTeamALeft(),
-                _inputTeamARight(),
-                _inputTeamAFirstSet(),
-                _inputTeamASecondSet(),
-                _inputTeamAThirdSet(),
-                _inputTeamBLeft(),
-                _inputTeamBRight(),
-                _inputTeamBFirstSet(),
-                _inputTeamBSecondSet(),
-                _inputTeamBThirdSet(),*/
+                ListTile(title: Text('Equipo A'), leading: Icon(Icons.people)),
+                Divider(),
+                Row(
+                  children: [
+                    Expanded(child: _inputTeamALeft()),
+                    SizedBox(width: 10.0),
+                    Expanded(child: _inputTeamARight()),
+                  ],
+                ),
+                SizedBox(height: 15.0),
+                //_inputTeamAFirstSet(),
+                //_inputTeamASecondSet(),
+                //_inputTeamAThirdSet(),
+                //_inputTeamBLeft(),
+                //_inputTeamBRight(),
+                //_inputTeamBFirstSet(),
+                //_inputTeamBSecondSet(),
+                //_inputTeamBThirdSet(),
                 //_inputClub(),
                 //_inputTournament(),
                 //_inputBall(),
@@ -60,6 +77,44 @@ class _MatchFormPageState extends State<MatchFormPage> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _inputTeamALeft() {
+    List<DropdownMenuItem<Player>> _dropdownItems = [];
+    _restOfPlayers.forEach((player) {
+      final _dropdownItem = DropdownMenuItem(
+        child: Text(player.name),
+        value: player,
+      );
+      _dropdownItems.add(_dropdownItem);
+    });
+    return DropdownButtonFormField(
+      hint: Text('Jugador revés'),
+      items: _dropdownItems,
+      onChanged: (value) => setState(() {
+        matchModel.teamALeft = value.playerId;
+      }),
+      onSaved: (value) => matchModel.teamALeft = value.playerId,
+    );
+  }
+
+  Widget _inputTeamARight() {
+    List<DropdownMenuItem<Player>> _dropdownItems = [];
+    _restOfPlayers.forEach((player) {
+      final _dropdownItem = DropdownMenuItem(
+        child: Text(player.name),
+        value: player,
+      );
+      _dropdownItems.add(_dropdownItem);
+    });
+    return DropdownButtonFormField(
+      hint: Text('Jugador drive'),
+      items: _dropdownItems,
+      onChanged: (value) => setState(() {
+        matchModel.teamARight = value.playerId;
+      }),
+      onSaved: (value) => matchModel.teamARight = value.playerId,
     );
   }
 
