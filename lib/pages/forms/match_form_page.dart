@@ -49,12 +49,19 @@ class _MatchFormPageState extends State<MatchFormPage> {
                     Expanded(child: _inputTeamARight()),
                   ],
                 ),
+                ListTile(title: Text('Equipo B'), leading: Icon(Icons.people)),
+                Divider(),
+                Row(
+                  children: [
+                    Expanded(child: _inputTeamBLeft()),
+                    SizedBox(width: 10.0),
+                    Expanded(child: _inputTeamBRight()),
+                  ],
+                ),
                 SizedBox(height: 15.0),
                 //_inputTeamAFirstSet(),
                 //_inputTeamASecondSet(),
                 //_inputTeamAThirdSet(),
-                //_inputTeamBLeft(),
-                //_inputTeamBRight(),
                 //_inputTeamBFirstSet(),
                 //_inputTeamBSecondSet(),
                 //_inputTeamBThirdSet(),
@@ -115,6 +122,44 @@ class _MatchFormPageState extends State<MatchFormPage> {
         matchModel.teamARight = value.playerId;
       }),
       onSaved: (value) => matchModel.teamARight = value.playerId,
+    );
+  }
+
+  Widget _inputTeamBRight() {
+    List<DropdownMenuItem<Player>> _dropdownItems = [];
+    _restOfPlayers.forEach((player) {
+      final _dropdownItem = DropdownMenuItem(
+        child: Text(player.name),
+        value: player,
+      );
+      _dropdownItems.add(_dropdownItem);
+    });
+    return DropdownButtonFormField(
+      hint: Text('Jugador drive'),
+      items: _dropdownItems,
+      onChanged: (value) => setState(() {
+        matchModel.teamBRight = value.playerId;
+      }),
+      onSaved: (value) => matchModel.teamBRight = value.playerId,
+    );
+  }
+
+  Widget _inputTeamBLeft() {
+    List<DropdownMenuItem<Player>> _dropdownItems = [];
+    _restOfPlayers.forEach((player) {
+      final _dropdownItem = DropdownMenuItem(
+        child: Text(player.name),
+        value: player,
+      );
+      _dropdownItems.add(_dropdownItem);
+    });
+    return DropdownButtonFormField(
+      hint: Text('Jugador revés'),
+      items: _dropdownItems,
+      onChanged: (value) => setState(() {
+        matchModel.teamBLeft = value.playerId;
+      }),
+      onSaved: (value) => matchModel.teamBLeft = value.playerId,
     );
   }
 
