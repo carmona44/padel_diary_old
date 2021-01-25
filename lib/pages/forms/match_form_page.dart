@@ -88,17 +88,9 @@ class _MatchFormPageState extends State<MatchFormPage> {
   }
 
   Widget _inputTeamALeft() {
-    List<DropdownMenuItem<Player>> _dropdownItems = [];
-    _restOfPlayers.forEach((player) {
-      final _dropdownItem = DropdownMenuItem(
-        child: Text(player.name),
-        value: player,
-      );
-      _dropdownItems.add(_dropdownItem);
-    });
     return DropdownButtonFormField(
       hint: Text('Jugador revés'),
-      items: _dropdownItems,
+      items: _getDropdownMenuPlayers(),
       onChanged: (value) => setState(() {
         matchModel.teamALeft = value.playerId;
       }),
@@ -107,17 +99,9 @@ class _MatchFormPageState extends State<MatchFormPage> {
   }
 
   Widget _inputTeamARight() {
-    List<DropdownMenuItem<Player>> _dropdownItems = [];
-    _restOfPlayers.forEach((player) {
-      final _dropdownItem = DropdownMenuItem(
-        child: Text(player.name),
-        value: player,
-      );
-      _dropdownItems.add(_dropdownItem);
-    });
     return DropdownButtonFormField(
       hint: Text('Jugador drive'),
-      items: _dropdownItems,
+      items: _getDropdownMenuPlayers(),
       onChanged: (value) => setState(() {
         matchModel.teamARight = value.playerId;
       }),
@@ -126,17 +110,9 @@ class _MatchFormPageState extends State<MatchFormPage> {
   }
 
   Widget _inputTeamBRight() {
-    List<DropdownMenuItem<Player>> _dropdownItems = [];
-    _restOfPlayers.forEach((player) {
-      final _dropdownItem = DropdownMenuItem(
-        child: Text(player.name),
-        value: player,
-      );
-      _dropdownItems.add(_dropdownItem);
-    });
     return DropdownButtonFormField(
       hint: Text('Jugador drive'),
-      items: _dropdownItems,
+      items: _getDropdownMenuPlayers(),
       onChanged: (value) => setState(() {
         matchModel.teamBRight = value.playerId;
       }),
@@ -145,17 +121,9 @@ class _MatchFormPageState extends State<MatchFormPage> {
   }
 
   Widget _inputTeamBLeft() {
-    List<DropdownMenuItem<Player>> _dropdownItems = [];
-    _restOfPlayers.forEach((player) {
-      final _dropdownItem = DropdownMenuItem(
-        child: Text(player.name),
-        value: player,
-      );
-      _dropdownItems.add(_dropdownItem);
-    });
     return DropdownButtonFormField(
       hint: Text('Jugador revés'),
-      items: _dropdownItems,
+      items: _getDropdownMenuPlayers(),
       onChanged: (value) => setState(() {
         matchModel.teamBLeft = value.playerId;
       }),
@@ -306,5 +274,17 @@ class _MatchFormPageState extends State<MatchFormPage> {
     setState(() {
       matchModel = Match();
     });
+  }
+
+  List<DropdownMenuItem<Player>> _getDropdownMenuPlayers() {
+    List<DropdownMenuItem<Player>> _dropdownItems = [];
+    _restOfPlayers.forEach((player) {
+      final _dropdownItem = DropdownMenuItem(
+        child: Text(player.name),
+        value: player,
+      );
+      _dropdownItems.add(_dropdownItem);
+    });
+    return _dropdownItems;
   }
 }
