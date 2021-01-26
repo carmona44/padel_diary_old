@@ -68,8 +68,11 @@ class _MatchFormPageState extends State<MatchFormPage> {
                   SizedBox(width: 10.0),
                   Expanded(child: _durationInput(context))
                 ]),
+                SizedBox(height: 25.0),
                 _temperatureInput(),
+                SizedBox(height: 25.0),
                 _effortInput(),
+                SizedBox(height: 25.0),
                 //_mvpInput(),
                 _commentsInput(),
                 SizedBox(height: 25.0),
