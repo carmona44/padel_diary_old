@@ -73,7 +73,7 @@ class _MatchFormPageState extends State<MatchFormPage> {
                   SizedBox(width: 10.0),
                   Expanded(child: _durationInput(context))
                 ]),
-                SizedBox(height: 25.0),
+                SizedBox(height: 15.0),
                 _temperatureInput(),
                 //_inputClub(),
                 //_inputTournament(),
@@ -174,20 +174,30 @@ class _MatchFormPageState extends State<MatchFormPage> {
             ),
           ),
         ),
-        SizedBox(height: 25.0),
+        SizedBox(height: 15.0),
       ],
     );
   }
 
   Widget _mvpInput() {
-    return DropdownButtonFormField(
-      hint: Text('MVP del partido'),
-      items:
-          _mvpPlayers.length == 4 ? _getDropdownMenuPlayers(_mvpPlayers) : [],
-      onChanged: (value) => setState(() {
-        matchModel.mvp = value.playerId;
-      }),
-      onSaved: (value) => matchModel.mvp = value.playerId,
+    return Column(
+      children: [
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: 90.0),
+          child: DropdownButtonFormField(
+            hint: Text('⭐ MVP del partido'),
+            items: _mvpPlayers.length ==
+                    4 //TODO: repasar adds y removes de _mvpPlayers
+                ? _getDropdownMenuPlayers(_mvpPlayers)
+                : [],
+            onChanged: (value) => setState(() {
+              matchModel.mvp = value.playerId;
+            }),
+            onSaved: (value) => matchModel.mvp = value.playerId,
+          ),
+        ),
+        SizedBox(height: 25.0)
+      ],
     );
   }
 
