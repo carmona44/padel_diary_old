@@ -20,6 +20,7 @@ class _MatchFormPageState extends State<MatchFormPage> {
 
   double _effortSliderValue = 5.0;
   List<Player> _restOfPlayers = [];
+  List<Player> _mvpPlayers = [];
 
   @override
   Widget build(BuildContext context) {
@@ -66,9 +67,7 @@ class _MatchFormPageState extends State<MatchFormPage> {
                 ),
                 SizedBox(height: 15.0),
                 _resultContainer(),
-                //_inputClub(),
-                //_inputTournament(),
-                //_inputBall(),
+                _mvpInput(),
                 Row(children: [
                   Expanded(child: _dateInput(context)),
                   SizedBox(width: 10.0),
@@ -76,10 +75,12 @@ class _MatchFormPageState extends State<MatchFormPage> {
                 ]),
                 SizedBox(height: 25.0),
                 _temperatureInput(),
+                //_inputClub(),
+                //_inputTournament(),
+                //_inputBall(),
                 SizedBox(height: 25.0),
                 _effortInput(),
                 SizedBox(height: 25.0),
-                //_mvpInput(),
                 _commentsInput(),
                 SizedBox(height: 25.0),
                 _submitButton()
@@ -178,12 +179,29 @@ class _MatchFormPageState extends State<MatchFormPage> {
     );
   }
 
+  Widget _mvpInput() {
+    return DropdownButtonFormField(
+      hint: Text('MVP del partido'),
+      items:
+          _mvpPlayers.length == 4 ? _getDropdownMenuPlayers(_mvpPlayers) : [],
+      onChanged: (value) => setState(() {
+        matchModel.mvp = value.playerId;
+      }),
+      onSaved: (value) => matchModel.mvp = value.playerId,
+    );
+  }
+
   Widget _inputTeamALeft() {
     return DropdownButtonFormField(
       hint: Text('Jugador revés'),
-      items: _getDropdownMenuPlayers(),
+      items: _getDropdownMenuPlayers(_restOfPlayers),
       onChanged: (value) => setState(() {
         matchModel.teamALeft = value.playerId;
+        if (matchModel.teamALeft != null) {
+          _mvpPlayers
+              .removeWhere((player) => player.playerId == matchModel.teamALeft);
+        }
+        _mvpPlayers.add(value);
       }),
       onSaved: (value) => matchModel.teamALeft = value.playerId,
     );
@@ -192,9 +210,14 @@ class _MatchFormPageState extends State<MatchFormPage> {
   Widget _inputTeamARight() {
     return DropdownButtonFormField(
       hint: Text('Jugador drive'),
-      items: _getDropdownMenuPlayers(),
+      items: _getDropdownMenuPlayers(_restOfPlayers),
       onChanged: (value) => setState(() {
         matchModel.teamARight = value.playerId;
+        if (matchModel.teamARight != null) {
+          _mvpPlayers.removeWhere(
+              (player) => player.playerId == matchModel.teamARight);
+        }
+        _mvpPlayers.add(value);
       }),
       onSaved: (value) => matchModel.teamARight = value.playerId,
     );
@@ -203,9 +226,14 @@ class _MatchFormPageState extends State<MatchFormPage> {
   Widget _inputTeamBRight() {
     return DropdownButtonFormField(
       hint: Text('Jugador drive'),
-      items: _getDropdownMenuPlayers(),
+      items: _getDropdownMenuPlayers(_restOfPlayers),
       onChanged: (value) => setState(() {
         matchModel.teamBRight = value.playerId;
+        if (matchModel.teamBRight != null) {
+          _mvpPlayers.removeWhere(
+              (player) => player.playerId == matchModel.teamBRight);
+        }
+        _mvpPlayers.add(value);
       }),
       onSaved: (value) => matchModel.teamBRight = value.playerId,
     );
@@ -214,9 +242,14 @@ class _MatchFormPageState extends State<MatchFormPage> {
   Widget _inputTeamBLeft() {
     return DropdownButtonFormField(
       hint: Text('Jugador revés'),
-      items: _getDropdownMenuPlayers(),
+      items: _getDropdownMenuPlayers(_restOfPlayers),
       onChanged: (value) => setState(() {
         matchModel.teamBLeft = value.playerId;
+        if (matchModel.teamBLeft != null) {
+          _mvpPlayers
+              .removeWhere((player) => player.playerId == matchModel.teamBLeft);
+        }
+        _mvpPlayers.add(value);
       }),
       onSaved: (value) => matchModel.teamBLeft = value.playerId,
     );
@@ -367,9 +400,9 @@ class _MatchFormPageState extends State<MatchFormPage> {
     });
   }
 
-  List<DropdownMenuItem<Player>> _getDropdownMenuPlayers() {
+  List<DropdownMenuItem<Player>> _getDropdownMenuPlayers(List<Player> players) {
     List<DropdownMenuItem<Player>> _dropdownItems = [];
-    _restOfPlayers.forEach((player) {
+    players.forEach((player) {
       final _dropdownItem = DropdownMenuItem(
         child: Text(player.name),
         value: player,
