@@ -27,6 +27,12 @@ class _MatchFormPageState extends State<MatchFormPage> {
     final _players = _playerProvider.players;
     setState(() {
       _restOfPlayers = _players;
+      matchModel.teamAFirstSet = 0;
+      matchModel.teamASecondSet = 0;
+      matchModel.teamAThirdSet = 0;
+      matchModel.teamBFirstSet = 0;
+      matchModel.teamBSecondSet = 0;
+      matchModel.teamBThirdSet = 0;
     });
 
     return Scaffold(
