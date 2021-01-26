@@ -59,12 +59,7 @@ class _MatchFormPageState extends State<MatchFormPage> {
                   ],
                 ),
                 SizedBox(height: 15.0),
-                //_inputTeamAFirstSet(),
-                //_inputTeamASecondSet(),
-                //_inputTeamAThirdSet(),
-                //_inputTeamBFirstSet(),
-                //_inputTeamBSecondSet(),
-                //_inputTeamBThirdSet(),
+                _resultContainer(),
                 //_inputClub(),
                 //_inputTournament(),
                 //_inputBall(),
@@ -84,6 +79,93 @@ class _MatchFormPageState extends State<MatchFormPage> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _resultContainer() {
+    return Column(
+      children: [
+        SizedBox(height: 25.0),
+        Card(
+          elevation: 12.0,
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
+            child: Table(
+              defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+              defaultColumnWidth: FlexColumnWidth(2.0),
+              children: [
+                TableRow(children: [
+                  SizedBox(),
+                  Text('Set 1', textAlign: TextAlign.center),
+                  Text('Set 2', textAlign: TextAlign.center),
+                  Text('Set 3', textAlign: TextAlign.center),
+                ]),
+                TableRow(children: [
+                  SizedBox(height: 10.0),
+                  SizedBox(),
+                  SizedBox(),
+                  SizedBox()
+                ]),
+                TableRow(children: [
+                  Text('Equipo A', textAlign: TextAlign.center),
+                  TextFormField(
+                    keyboardType: TextInputType.number,
+                    initialValue: '0',
+                    textAlign: TextAlign.center,
+                    onSaved: (value) =>
+                        matchModel.teamAFirstSet = int.tryParse(value),
+                  ),
+                  TextFormField(
+                    keyboardType: TextInputType.number,
+                    initialValue: '0',
+                    textAlign: TextAlign.center,
+                    onSaved: (value) =>
+                        matchModel.teamASecondSet = int.tryParse(value),
+                  ),
+                  TextFormField(
+                    keyboardType: TextInputType.number,
+                    initialValue: '0',
+                    textAlign: TextAlign.center,
+                    onSaved: (value) =>
+                        matchModel.teamAThirdSet = int.tryParse(value),
+                  ),
+                ]),
+                TableRow(children: [
+                  SizedBox(height: 10.0),
+                  SizedBox(),
+                  SizedBox(),
+                  SizedBox(),
+                ]),
+                TableRow(children: [
+                  Text('Equipo B', textAlign: TextAlign.center),
+                  TextFormField(
+                    keyboardType: TextInputType.number,
+                    initialValue: '0',
+                    textAlign: TextAlign.center,
+                    onSaved: (value) =>
+                        matchModel.teamBFirstSet = int.tryParse(value),
+                  ),
+                  TextFormField(
+                    keyboardType: TextInputType.number,
+                    initialValue: '0',
+                    textAlign: TextAlign.center,
+                    onSaved: (value) =>
+                        matchModel.teamBSecondSet = int.tryParse(value),
+                  ),
+                  TextFormField(
+                    keyboardType: TextInputType.number,
+                    initialValue: '0',
+                    textAlign: TextAlign.center,
+                    onSaved: (value) =>
+                        matchModel.teamBThirdSet = int.tryParse(value),
+                  ),
+                ]),
+              ],
+            ),
+          ),
+        ),
+        SizedBox(height: 25.0),
+      ],
     );
   }
 
