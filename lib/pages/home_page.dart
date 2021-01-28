@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:padel_diary/pages/matches_page.dart';
-import 'package:padel_diary/pages/profile_page.dart';
+import 'package:padel_diary/pages/my_data_page.dart';
 //import 'package:padel_diary/pages/rankings_page.dart';
 //import 'package:padel_diary/pages/stats_page.dart';
 import 'package:padel_diary/providers/player_provider.dart';
@@ -36,7 +36,7 @@ class _HomePageBody extends StatelessWidget {
 
     switch (_selectedTabIndex) {
       case 0:
-        return ProfilePage();
+        return MyDataPage();
         break;
 
       case 1:

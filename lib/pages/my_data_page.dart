@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:padel_diary/models/tournament_model.dart';
 import 'package:padel_diary/models/ball_model.dart';*/
 
-class ProfilePage extends StatelessWidget {
+class MyDataPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final playerProvider = Provider.of<PlayerProvider>(context);

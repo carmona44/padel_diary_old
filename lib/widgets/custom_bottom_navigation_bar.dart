@@ -19,7 +19,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.account_circle),
-            label: 'Perfil',
+            label: 'Mis datos',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.sports_baseball),
