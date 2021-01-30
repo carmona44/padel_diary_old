@@ -125,21 +125,21 @@ class _MatchFormPageState extends State<MatchFormPage> {
                   Text('Equipo A', textAlign: TextAlign.center),
                   TextFormField(
                     keyboardType: TextInputType.number,
-                    initialValue: '0',
+                    decoration: InputDecoration(hintText: '0'),
                     textAlign: TextAlign.center,
                     onSaved: (value) =>
                         matchModel.teamAFirstSet = int.tryParse(value),
                   ),
                   TextFormField(
                     keyboardType: TextInputType.number,
-                    initialValue: '0',
+                    decoration: InputDecoration(hintText: '0'),
                     textAlign: TextAlign.center,
                     onSaved: (value) =>
                         matchModel.teamASecondSet = int.tryParse(value),
                   ),
                   TextFormField(
                     keyboardType: TextInputType.number,
-                    initialValue: '0',
+                    decoration: InputDecoration(hintText: '0'),
                     textAlign: TextAlign.center,
                     onSaved: (value) =>
                         matchModel.teamAThirdSet = int.tryParse(value),
@@ -155,21 +155,21 @@ class _MatchFormPageState extends State<MatchFormPage> {
                   Text('Equipo B', textAlign: TextAlign.center),
                   TextFormField(
                     keyboardType: TextInputType.number,
-                    initialValue: '0',
+                    decoration: InputDecoration(hintText: '0'),
                     textAlign: TextAlign.center,
                     onSaved: (value) =>
                         matchModel.teamBFirstSet = int.tryParse(value),
                   ),
                   TextFormField(
                     keyboardType: TextInputType.number,
-                    initialValue: '0',
+                    decoration: InputDecoration(hintText: '0'),
                     textAlign: TextAlign.center,
                     onSaved: (value) =>
                         matchModel.teamBSecondSet = int.tryParse(value),
                   ),
                   TextFormField(
                     keyboardType: TextInputType.number,
-                    initialValue: '0',
+                    decoration: InputDecoration(hintText: '0'),
                     textAlign: TextAlign.center,
                     onSaved: (value) =>
                         matchModel.teamBThirdSet = int.tryParse(value),
