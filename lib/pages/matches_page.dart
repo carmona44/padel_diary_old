@@ -32,7 +32,8 @@ class MatchesPage extends StatelessWidget {
                         child: Text('Daniel / Jose Javier',
                             textAlign: TextAlign.center),
                       ),
-                      Icon(Icons.ac_unit), //SizedBox()
+                      Icon(Icons.emoji_events,
+                          color: Colors.amberAccent), //SizedBox()
                       Text('6',
                           style: _setResultStyle, textAlign: TextAlign.center),
                       Text('7',
@@ -55,7 +56,7 @@ class MatchesPage extends StatelessWidget {
                         child:
                             Text('Jesús / Luis', textAlign: TextAlign.center),
                       ),
-                      Icon(Icons.ac_unit), //SizedBox()
+                      /*Icon(Icons.emoji_events),*/ SizedBox(),
                       Text('4',
                           style: _setResultStyle, textAlign: TextAlign.center),
                       Text('5',
