@@ -199,6 +199,8 @@ class _MatchFormPageState extends State<MatchFormPage> {
               matchModel.mvp = value.playerId;
             }),
             onSaved: (value) => matchModel.mvp = value.playerId,
+            validator: (value) =>
+                value == null ? 'Selecciona un jugador' : null,
           ),
         ),
         SizedBox(height: 25.0)
@@ -215,6 +217,7 @@ class _MatchFormPageState extends State<MatchFormPage> {
         _teamALeft = value;
       }),
       onSaved: (value) => matchModel.teamALeft = value.playerId,
+      validator: (value) => value == null ? 'Selecciona un jugador' : null,
     );
   }
 
@@ -227,6 +230,7 @@ class _MatchFormPageState extends State<MatchFormPage> {
         _teamARight = value;
       }),
       onSaved: (value) => matchModel.teamARight = value.playerId,
+      validator: (value) => value == null ? 'Selecciona un jugador' : null,
     );
   }
 
@@ -239,6 +243,7 @@ class _MatchFormPageState extends State<MatchFormPage> {
         _teamBRight = value;
       }),
       onSaved: (value) => matchModel.teamBRight = value.playerId,
+      validator: (value) => value == null ? 'Selecciona un jugador' : null,
     );
   }
 
@@ -251,6 +256,7 @@ class _MatchFormPageState extends State<MatchFormPage> {
         _teamBLeft = value;
       }),
       onSaved: (value) => matchModel.teamBLeft = value.playerId,
+      validator: (value) => value == null ? 'Selecciona un jugador' : null,
     );
   }
 
@@ -263,6 +269,7 @@ class _MatchFormPageState extends State<MatchFormPage> {
         FocusScope.of(context).requestFocus(new FocusNode());
         _selectDate(context);
       },
+      validator: (value) => value == '' ? 'Selecciona una fecha' : null,
     );
   }
 
@@ -303,6 +310,9 @@ class _MatchFormPageState extends State<MatchFormPage> {
           onTap: () {
             FocusScope.of(context).requestFocus(new FocusNode());
             _selectDuration(context);
+          },
+          onSaved: (value) {
+            print(value);
           },
         ),
       ),
@@ -396,6 +406,8 @@ class _MatchFormPageState extends State<MatchFormPage> {
     formKey.currentState.reset();
     setState(() {
       matchModel = Match();
+      _dateController.text = '';
+      _durationController.text = '';
     });
   }
 
