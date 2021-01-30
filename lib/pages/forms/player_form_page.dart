@@ -53,20 +53,37 @@ class _PlayerFormPageState extends State<PlayerFormPage> {
   }
 
   Widget _nameInput() {
-    return TextFormField(
-      textCapitalization: TextCapitalization.sentences,
-      decoration: InputDecoration(labelText: 'Nombre'),
-      validator: (value) =>
-          value.length < 1 ? 'El nombre del jugador es obligatorio' : null,
-      onSaved: (value) => playerModel.name = value,
+    return Row(
+      children: [
+        Icon(Icons.badge),
+        SizedBox(width: 10.0),
+        Expanded(
+          child: TextFormField(
+            textCapitalization: TextCapitalization.sentences,
+            decoration: InputDecoration(labelText: 'Nombre'),
+            validator: (value) => value.length < 1
+                ? 'El nombre del jugador es obligatorio'
+                : null,
+            onSaved: (value) => playerModel.name = value,
+          ),
+        ),
+      ],
     );
   }
 
   Widget _surnameInput() {
-    return TextFormField(
-      textCapitalization: TextCapitalization.sentences,
-      decoration: InputDecoration(labelText: 'Apellidos'),
-      onSaved: (value) => playerModel.surname = value,
+    return Row(
+      children: [
+        Icon(Icons.badge),
+        SizedBox(width: 10.0),
+        Expanded(
+          child: TextFormField(
+            textCapitalization: TextCapitalization.sentences,
+            decoration: InputDecoration(labelText: 'Apellidos'),
+            onSaved: (value) => playerModel.surname = value,
+          ),
+        ),
+      ],
     );
   }
 
@@ -81,46 +98,65 @@ class _PlayerFormPageState extends State<PlayerFormPage> {
         value: 'Drive / Derecha',
       )
     ];
-    return DropdownButtonFormField(
-      hint: Text('Posición preferida'),
-      items: _dropdownItems,
-      onChanged: (value) => setState(() {
-        playerModel.position = value;
-      }),
-      onSaved: (value) => playerModel.position = value,
+    return Row(
+      children: [
+        Icon(Icons.swap_horiz),
+        SizedBox(width: 10.0),
+        Expanded(
+          child: DropdownButtonFormField(
+            hint: Text('Posición preferida'),
+            items: _dropdownItems,
+            onChanged: (value) => setState(() {
+              playerModel.position = value;
+            }),
+            onSaved: (value) => playerModel.position = value,
+          ),
+        ),
+      ],
     );
   }
 
   Widget _ageInput() {
-    return TextFormField(
-      keyboardType: TextInputType.number,
-      decoration: InputDecoration(labelText: 'Edad'),
-      onSaved: (value) => playerModel.age = int.tryParse(value),
+    return Row(
+      children: [
+        Icon(Icons.elderly),
+        SizedBox(width: 10.0),
+        Expanded(
+          child: TextFormField(
+            keyboardType: TextInputType.number,
+            decoration: InputDecoration(labelText: 'Edad'),
+            onSaved: (value) => playerModel.age = int.tryParse(value),
+          ),
+        ),
+      ],
     );
   }
 
   Widget _levelInput() {
     final _labels = ['PRO', '1ª', '2ª', '3ª', '4ª', '5ª'];
 
-    return Row(
-      children: [
-        Text('Nivel'),
-        Expanded(
-          child: Slider(
-            value: _sliderValue,
-            min: 0.0,
-            max: 5.0,
-            divisions: 5,
-            label: _labels[_sliderValue.toInt()],
-            onChanged: (value) {
-              setState(() {
-                _sliderValue = value;
-                playerModel.level = value.toInt();
-              });
-            },
+    return Container(
+      padding: EdgeInsets.only(top: 15.0),
+      child: Row(
+        children: [
+          Text('Nivel'),
+          Expanded(
+            child: Slider(
+              value: _sliderValue,
+              min: 0.0,
+              max: 5.0,
+              divisions: 5,
+              label: _labels[_sliderValue.toInt()],
+              onChanged: (value) {
+                setState(() {
+                  _sliderValue = value;
+                  playerModel.level = value.toInt();
+                });
+              },
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
@@ -167,18 +203,34 @@ class _PlayerFormPageState extends State<PlayerFormPage> {
   }*/
 
   Widget _countryInput() {
-    return TextFormField(
-      textCapitalization: TextCapitalization.sentences,
-      decoration: InputDecoration(labelText: 'País'),
-      onSaved: (value) => playerModel.country = value,
+    return Row(
+      children: [
+        Icon(Icons.public),
+        SizedBox(width: 10.0),
+        Expanded(
+          child: TextFormField(
+            textCapitalization: TextCapitalization.sentences,
+            decoration: InputDecoration(labelText: 'País'),
+            onSaved: (value) => playerModel.country = value,
+          ),
+        ),
+      ],
     );
   }
 
   Widget _regionInput() {
-    return TextFormField(
-      textCapitalization: TextCapitalization.sentences,
-      decoration: InputDecoration(labelText: 'Región'),
-      onSaved: (value) => playerModel.region = value,
+    return Row(
+      children: [
+        Icon(Icons.location_city),
+        SizedBox(width: 10.0),
+        Expanded(
+          child: TextFormField(
+            textCapitalization: TextCapitalization.sentences,
+            decoration: InputDecoration(labelText: 'Región'),
+            onSaved: (value) => playerModel.region = value,
+          ),
+        ),
+      ],
     );
   }
 
@@ -194,21 +246,37 @@ class _PlayerFormPageState extends State<PlayerFormPage> {
       _dropdownItems.add(_dropDownItem);
     });
 
-    return DropdownButtonFormField(
-      hint: Text('Golpe estrella'),
-      items: _dropdownItems,
-      onChanged: (value) => setState(() {
-        playerModel.favouriteHit = value;
-      }),
-      onSaved: (value) => playerModel.favouriteHit = value,
+    return Row(
+      children: [
+        Icon(Icons.star_outline),
+        SizedBox(width: 10.0),
+        Expanded(
+          child: DropdownButtonFormField(
+            hint: Text('Golpe estrella'),
+            items: _dropdownItems,
+            onChanged: (value) => setState(() {
+              playerModel.favouriteHit = value;
+            }),
+            onSaved: (value) => playerModel.favouriteHit = value,
+          ),
+        ),
+      ],
     );
   }
 
   Widget _racketInput() {
-    return TextFormField(
-      textCapitalization: TextCapitalization.sentences,
-      decoration: InputDecoration(labelText: 'Pala'),
-      onSaved: (value) => playerModel.racket = value,
+    return Row(
+      children: [
+        Icon(Icons.sports_tennis),
+        SizedBox(width: 10.0),
+        Expanded(
+          child: TextFormField(
+            textCapitalization: TextCapitalization.sentences,
+            decoration: InputDecoration(labelText: 'Pala'),
+            onSaved: (value) => playerModel.racket = value,
+          ),
+        ),
+      ],
     );
   }
 
