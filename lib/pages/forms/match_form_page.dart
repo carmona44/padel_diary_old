@@ -13,6 +13,7 @@ class MatchFormPage extends StatefulWidget {
 
 class _MatchFormPageState extends State<MatchFormPage> {
   final formKey = GlobalKey<FormState>();
+  final scaffoldKey = GlobalKey<ScaffoldState>();
   Match matchModel = Match();
 
   TextEditingController _dateController = new TextEditingController();
@@ -40,6 +41,7 @@ class _MatchFormPageState extends State<MatchFormPage> {
     });
 
     return Scaffold(
+      key: scaffoldKey,
       appBar: AppBar(
         title: Text('Añadir nuevo partido'),
       ),
@@ -311,9 +313,6 @@ class _MatchFormPageState extends State<MatchFormPage> {
             FocusScope.of(context).requestFocus(new FocusNode());
             _selectDuration(context);
           },
-          onSaved: (value) {
-            print(value);
-          },
         ),
       ),
     );
@@ -404,6 +403,8 @@ class _MatchFormPageState extends State<MatchFormPage> {
     matchProvider.createMatch(matchModel);
 
     formKey.currentState.reset();
+    showSnackbar('Partido creado con éxito');
+
     setState(() {
       matchModel = Match();
       _dateController.text = '';
@@ -424,5 +425,15 @@ class _MatchFormPageState extends State<MatchFormPage> {
       _dropdownItems.add(_dropdownItem);
     });
     return _dropdownItems;
+  }
+
+  void showSnackbar(String message) {
+    final snackbar = SnackBar(
+      content: Text(message),
+      duration: Duration(milliseconds: 3000),
+      backgroundColor: Colors.green,
+    );
+
+    scaffoldKey.currentState.showSnackBar(snackbar);
   }
 }
