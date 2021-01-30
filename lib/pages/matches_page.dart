@@ -1,22 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:padel_diary/models/match_model.dart';
+import 'package:padel_diary/providers/match_provider.dart';
+import 'package:provider/provider.dart';
 
 class MatchesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final matchProvider = Provider.of<MatchProvider>(context);
+    final matches = matchProvider.matches;
+
     return ListView.builder(
       padding: EdgeInsets.only(bottom: 20.0),
-      itemCount: 10,
-      itemBuilder: (context, index) => _createMatchContainer(),
+      itemCount: matches.length,
+      itemBuilder: (context, i) => _createMatchContainer(matches[i]),
     );
   }
 
-  Widget _createMatchContainer() {
+  Widget _createMatchContainer(Match match) {
     TextStyle _setResultStyle = TextStyle(fontSize: 24.0);
     return Container(
       padding: EdgeInsets.all(10.0),
       child: Column(
         children: [
-          Text('28/01/2021'),
+          Text(DateTime(match.date).toString()),
           Card(
             elevation: 12.0,
             child: Container(
@@ -29,16 +35,16 @@ class MatchesPage extends StatelessWidget {
                     children: [
                       Container(
                         padding: EdgeInsets.only(left: 5.0),
-                        child: Text('Daniel / Jose Javier',
+                        child: Text('${match.teamALeft} / ${match.teamARight}',
                             textAlign: TextAlign.center),
                       ),
                       Icon(Icons.emoji_events,
                           color: Colors.amberAccent), //SizedBox()
-                      Text('6',
+                      Text('${match.teamAFirstSet}',
                           style: _setResultStyle, textAlign: TextAlign.center),
-                      Text('7',
+                      Text('${match.teamASecondSet}',
                           style: _setResultStyle, textAlign: TextAlign.center),
-                      Text('6',
+                      Text('${match.teamAThirdSet}',
                           style: _setResultStyle, textAlign: TextAlign.center),
                     ],
                   ),
@@ -53,15 +59,15 @@ class MatchesPage extends StatelessWidget {
                     children: [
                       Container(
                         padding: EdgeInsets.only(left: 5.0),
-                        child:
-                            Text('Jesús / Luis', textAlign: TextAlign.center),
+                        child: Text('${match.teamBLeft} / ${match.teamBRight}',
+                            textAlign: TextAlign.center),
                       ),
                       /*Icon(Icons.emoji_events),*/ SizedBox(),
-                      Text('4',
+                      Text('${match.teamBFirstSet}',
                           style: _setResultStyle, textAlign: TextAlign.center),
-                      Text('5',
+                      Text('${match.teamBSecondSet}',
                           style: _setResultStyle, textAlign: TextAlign.center),
-                      Text('3',
+                      Text('${match.teamBThirdSet}',
                           style: _setResultStyle, textAlign: TextAlign.center),
                     ],
                   ),
