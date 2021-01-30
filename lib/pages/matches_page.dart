@@ -4,6 +4,7 @@ class MatchesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+      padding: EdgeInsets.only(bottom: 20.0),
       itemCount: 10,
       itemBuilder: (context, index) => _createMatchContainer(),
     );
