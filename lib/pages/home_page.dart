@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:padel_diary/pages/matches_page.dart';
 import 'package:padel_diary/pages/my_data_page.dart';
+import 'package:padel_diary/providers/match_provider.dart';
 //import 'package:padel_diary/pages/rankings_page.dart';
 //import 'package:padel_diary/pages/stats_page.dart';
 import 'package:padel_diary/providers/player_provider.dart';
@@ -33,6 +34,8 @@ class _HomePageBody extends StatelessWidget {
 
     final playerProvider = Provider.of<PlayerProvider>(context, listen: false);
     playerProvider.getAllPlayers();
+    final matchProvider = Provider.of<MatchProvider>(context, listen: false);
+    matchProvider.getAllMatches();
 
     switch (_selectedTabIndex) {
       case 0:
