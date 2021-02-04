@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:padel_diary/models/match_model.dart';
 import 'package:padel_diary/providers/match_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:intl/intl.dart';
 
 class MatchesPage extends StatelessWidget {
   @override
@@ -17,12 +18,16 @@ class MatchesPage extends StatelessWidget {
   }
 
   Widget _createMatchContainer(Match match) {
+    final DateFormat formatter = DateFormat('dd / MM / yyyy');
+    final String _matchDate =
+        formatter.format(DateTime.fromMillisecondsSinceEpoch(match.date));
     TextStyle _setResultStyle = TextStyle(fontSize: 24.0);
+
     return Container(
       padding: EdgeInsets.all(10.0),
       child: Column(
         children: [
-          Text(DateTime(match.date).toString()),
+          Text(_matchDate),
           Card(
             elevation: 12.0,
             child: Container(

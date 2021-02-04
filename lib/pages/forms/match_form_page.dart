@@ -281,7 +281,7 @@ class _MatchFormPageState extends State<MatchFormPage> {
       final String dateToPrint =
           '${dateNumbers[2]}-${dateNumbers[1]}-${dateNumbers[0]}';
       setState(() {
-        matchModel.date = picked.microsecondsSinceEpoch;
+        matchModel.date = picked.millisecondsSinceEpoch;
         _dateController.text = dateToPrint;
       });
     }
