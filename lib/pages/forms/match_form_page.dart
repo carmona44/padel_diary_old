@@ -402,7 +402,10 @@ class _MatchFormPageState extends State<MatchFormPage> {
       matchModel = Match();
       _dateController.text = '';
       _durationController.text = '';
-      _getDropdownMenuPlayers([]);
+      _teamALeft = Player();
+      _teamBLeft = Player();
+      _teamARight = Player();
+      _teamBRight = Player();
     });
   }
 
