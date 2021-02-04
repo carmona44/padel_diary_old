@@ -31,12 +31,6 @@ class _MatchFormPageState extends State<MatchFormPage> {
     final _players = _playerProvider.players;
     setState(() {
       _restOfPlayers = _players;
-      matchModel.teamAFirstSet = 0;
-      matchModel.teamASecondSet = 0;
-      matchModel.teamAThirdSet = 0;
-      matchModel.teamBFirstSet = 0;
-      matchModel.teamBSecondSet = 0;
-      matchModel.teamBThirdSet = 0;
     });
 
     return Scaffold(
@@ -126,21 +120,21 @@ class _MatchFormPageState extends State<MatchFormPage> {
                     decoration: InputDecoration(hintText: '0'),
                     textAlign: TextAlign.center,
                     onSaved: (value) =>
-                        matchModel.teamAFirstSet = int.tryParse(value),
+                        matchModel.teamAFirstSet = int.tryParse(value) ?? 0,
                   ),
                   TextFormField(
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(hintText: '0'),
                     textAlign: TextAlign.center,
                     onSaved: (value) =>
-                        matchModel.teamASecondSet = int.tryParse(value),
+                        matchModel.teamASecondSet = int.tryParse(value) ?? 0,
                   ),
                   TextFormField(
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(hintText: '0'),
                     textAlign: TextAlign.center,
                     onSaved: (value) =>
-                        matchModel.teamAThirdSet = int.tryParse(value),
+                        matchModel.teamAThirdSet = int.tryParse(value) ?? 0,
                   ),
                 ]),
                 TableRow(children: [
@@ -156,21 +150,21 @@ class _MatchFormPageState extends State<MatchFormPage> {
                     decoration: InputDecoration(hintText: '0'),
                     textAlign: TextAlign.center,
                     onSaved: (value) =>
-                        matchModel.teamBFirstSet = int.tryParse(value),
+                        matchModel.teamBFirstSet = int.tryParse(value) ?? 0,
                   ),
                   TextFormField(
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(hintText: '0'),
                     textAlign: TextAlign.center,
                     onSaved: (value) =>
-                        matchModel.teamBSecondSet = int.tryParse(value),
+                        matchModel.teamBSecondSet = int.tryParse(value) ?? 0,
                   ),
                   TextFormField(
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(hintText: '0'),
                     textAlign: TextAlign.center,
                     onSaved: (value) =>
-                        matchModel.teamBThirdSet = int.tryParse(value),
+                        matchModel.teamBThirdSet = int.tryParse(value) ?? 0,
                   ),
                 ]),
               ],
@@ -408,6 +402,7 @@ class _MatchFormPageState extends State<MatchFormPage> {
       matchModel = Match();
       _dateController.text = '';
       _durationController.text = '';
+      _getDropdownMenuPlayers([]);
     });
   }
 
