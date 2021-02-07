@@ -66,6 +66,7 @@ class DBProvider {
             FOREIGN KEY (teamA_right) REFERENCES players (player_id) ON DELETE CASCADE ON UPDATE NO ACTION,
             FOREIGN KEY (teamB_left) REFERENCES players (player_id) ON DELETE CASCADE ON UPDATE NO ACTION,
             FOREIGN KEY (teamB_right) REFERENCES players (player_id) ON DELETE CASCADE ON UPDATE NO ACTION,
+            FOREIGN KEY (mvp) REFERENCES players (player_id) ON DELETE CASCADE ON UPDATE NO ACTION,
             FOREIGN KEY (club) REFERENCES clubs (club_id) ON DELETE CASCADE ON UPDATE NO ACTION,
             FOREIGN KEY (tournament) REFERENCES tournaments (tournament_id) ON DELETE CASCADE ON UPDATE NO ACTION,
             FOREIGN KEY (ball) REFERENCES balls (ball_id) ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -133,6 +134,39 @@ class DBProvider {
   Future<List<Match>> getAllMatches() async {
     final db = await database;
     final res = await db.query('matches');
+
+    return res.isNotEmpty
+        ? res.map((match) => Match.fromJson(match)).toList()
+        : null;
+  }
+
+  Future<List<dynamic>> getMatchesResult() async {
+    final db = await database;
+    final res = await db.rawQuery('''
+      SELECT 
+        match_id,
+        date,
+        p1.name as teamA_left,
+        p2.name as teamA_right,
+        p3.name as teamB_left,
+        p4.name as teamB_right,
+        teamA_first_set,
+        teamA_second_set,
+        teamA_third_set,
+        teamB_first_set,
+        teamB_second_set,
+        teamB_third_set
+      FROM
+        matches
+      INNER JOIN
+        players p1 ON teamA_left = p1.player_id
+      INNER JOIN
+        players p2 ON teamA_right = p2.player_id
+      INNER JOIN
+        players p3 ON teamB_left = p3.player_id
+      INNER JOIN
+        players p4 ON teamB_right = p4.player_id
+    ''');
 
     return res.isNotEmpty
         ? res.map((match) => Match.fromJson(match)).toList()
