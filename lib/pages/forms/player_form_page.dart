@@ -279,10 +279,10 @@ class _PlayerFormPageState extends State<PlayerFormPage> {
   }
 
   Widget _submitButton() {
-    return RaisedButton.icon(
+    return ElevatedButton.icon(
       icon: Icon(Icons.save),
       label: Text('Crear jugador'),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+      //shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
       onPressed: _saving ? null : _submit,
     );
   }

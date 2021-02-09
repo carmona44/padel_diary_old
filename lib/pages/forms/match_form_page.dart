@@ -378,10 +378,10 @@ class _MatchFormPageState extends State<MatchFormPage> {
   }
 
   Widget _submitButton() {
-    return RaisedButton.icon(
+    return ElevatedButton.icon(
       icon: Icon(Icons.save),
       label: Text('Crear partido'),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+      //shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
       onPressed: _submit,
     );
   }
