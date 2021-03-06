@@ -390,6 +390,7 @@ class _MatchFormPageState extends State<MatchFormPage> {
     if (!formKey.currentState.validate()) return;
 
     formKey.currentState.save();
+    _calculateWinningTeam();
 
     final matchProvider = Provider.of<MatchProvider>(context, listen: false);
     matchProvider.createMatch(matchModel);
@@ -432,5 +433,26 @@ class _MatchFormPageState extends State<MatchFormPage> {
     );
 
     return snackbar;
+  }
+
+  void _calculateWinningTeam() {
+    String _winningTeam = "tie";
+    int _teamASetsWon = 0;
+    int _teamBSetsWon = 0;
+
+    if (matchModel.teamAFirstSet > matchModel.teamBFirstSet) _teamASetsWon++;
+    if (matchModel.teamASecondSet > matchModel.teamBSecondSet) _teamASetsWon++;
+    if (matchModel.teamAThirdSet > matchModel.teamBThirdSet) _teamASetsWon++;
+
+    if (matchModel.teamAFirstSet < matchModel.teamBFirstSet) _teamBSetsWon++;
+    if (matchModel.teamASecondSet < matchModel.teamBSecondSet) _teamBSetsWon++;
+    if (matchModel.teamAThirdSet < matchModel.teamBThirdSet) _teamBSetsWon++;
+
+    if (_teamASetsWon > _teamBSetsWon) _winningTeam = "teamA";
+    if (_teamASetsWon < _teamBSetsWon) _winningTeam = "teamB";
+
+    setState(() {
+      matchModel.winningTeam = _winningTeam;
+    });
   }
 }

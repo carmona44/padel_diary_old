@@ -18,7 +18,8 @@ class MatchResult {
       this.teamBRight,
       this.teamBFirstSet,
       this.teamBSecondSet,
-      this.teamBThirdSet});
+      this.teamBThirdSet,
+      this.winningTeam});
 
   int matchId;
   int date;
@@ -32,6 +33,7 @@ class MatchResult {
   int teamBFirstSet;
   int teamBSecondSet;
   int teamBThirdSet;
+  String winningTeam;
 
   factory MatchResult.fromJson(Map<String, dynamic> json) => MatchResult(
       matchId: json["match_id"],
@@ -45,7 +47,8 @@ class MatchResult {
       teamBRight: json["teamB_right"],
       teamBFirstSet: json["teamB_first_set"],
       teamBSecondSet: json["teamB_second_set"],
-      teamBThirdSet: json["teamB_third_set"]);
+      teamBThirdSet: json["teamB_third_set"],
+      winningTeam: json["winning_team"]);
 
   Map<String, dynamic> toJson() => {
         "match_id": matchId,
@@ -59,6 +62,7 @@ class MatchResult {
         "teamB_right": teamBRight,
         "teamB_first_set": teamBFirstSet,
         "teamB_second_set": teamBSecondSet,
-        "teamB_third_set": teamBThirdSet
+        "teamB_third_set": teamBThirdSet,
+        "winning_team": winningTeam
       };
 }

@@ -43,8 +43,9 @@ class MatchesPage extends StatelessWidget {
                         child: Text('${match.teamALeft} / ${match.teamARight}',
                             textAlign: TextAlign.center),
                       ),
-                      Icon(Icons.emoji_events,
-                          color: Colors.amberAccent), //SizedBox()
+                      match.winningTeam == "teamA"
+                          ? Icon(Icons.emoji_events, color: Colors.amberAccent)
+                          : SizedBox(),
                       Text('${match.teamAFirstSet}',
                           style: _setResultStyle, textAlign: TextAlign.center),
                       Text('${match.teamASecondSet}',
@@ -67,7 +68,9 @@ class MatchesPage extends StatelessWidget {
                         child: Text('${match.teamBLeft} / ${match.teamBRight}',
                             textAlign: TextAlign.center),
                       ),
-                      /*Icon(Icons.emoji_events),*/ SizedBox(),
+                      match.winningTeam == "teamB"
+                          ? Icon(Icons.emoji_events, color: Colors.redAccent)
+                          : SizedBox(),
                       Text('${match.teamBFirstSet}',
                           style: _setResultStyle, textAlign: TextAlign.center),
                       Text('${match.teamBSecondSet}',

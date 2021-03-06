@@ -15,7 +15,7 @@ class PlayerProvider extends ChangeNotifier {
 
   getAllPlayers() async {
     final players = await DBProvider.db.getAllPlayers();
-    this.players = [...players];
+    this.players = players != null ? [...players] : [];
     notifyListeners();
   }
 }

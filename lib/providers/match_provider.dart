@@ -17,13 +17,13 @@ class MatchProvider extends ChangeNotifier {
 
   getAllMatches() async {
     final matches = await DBProvider.db.getAllMatches();
-    this.matches = [...matches];
+    this.matches = matches != null ? [...matches] : [];
     notifyListeners();
   }
 
   getMatchesResult() async {
     final matches = await DBProvider.db.getMatchesResult();
-    this.matchesResult = [...matches];
+    this.matchesResult = matches != null ? [...matches] : [];
     notifyListeners();
   }
 }
