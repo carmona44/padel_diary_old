@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:padel_diary/models/match_model.dart';
+import 'package:padel_diary/models/matchResult_model.dart';
 import 'package:padel_diary/providers/match_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
@@ -8,7 +8,7 @@ class MatchesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final matchProvider = Provider.of<MatchProvider>(context);
-    final matches = matchProvider.matches;
+    final matches = matchProvider.matchesResult;
 
     return ListView.builder(
       padding: EdgeInsets.only(bottom: 20.0),
@@ -17,7 +17,7 @@ class MatchesPage extends StatelessWidget {
     );
   }
 
-  Widget _createMatchContainer(Match match) {
+  Widget _createMatchContainer(MatchResult match) {
     final DateFormat formatter = DateFormat('dd / MM / yyyy');
     final String _matchDate =
         formatter.format(DateTime.fromMillisecondsSinceEpoch(match.date));

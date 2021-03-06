@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:padel_diary/models/matchResult_model.dart';
 import 'package:padel_diary/models/match_model.dart';
 import 'package:padel_diary/models/player_model.dart';
 import 'package:path/path.dart';
@@ -55,6 +56,7 @@ class DBProvider {
             teamB_first_set INTEGER,
             teamB_second_set INTEGER,
             teamB_third_set INTEGER,
+            winning_team TEXT,
             tournament INTEGER,
             comments TEXT,
             effort INTEGER,
@@ -140,7 +142,7 @@ class DBProvider {
         : null;
   }
 
-  Future<List<dynamic>> getMatchesResult() async {
+  Future<List<MatchResult>> getMatchesResult() async {
     final db = await database;
     final res = await db.rawQuery('''
       SELECT 
@@ -155,7 +157,8 @@ class DBProvider {
         teamA_third_set,
         teamB_first_set,
         teamB_second_set,
-        teamB_third_set
+        teamB_third_set,
+        winning_team
       FROM
         matches
       INNER JOIN
@@ -169,7 +172,7 @@ class DBProvider {
     ''');
 
     return res.isNotEmpty
-        ? res.map((match) => Match.fromJson(match)).toList()
+        ? res.map((match) => MatchResult.fromJson(match)).toList()
         : null;
   }
 }

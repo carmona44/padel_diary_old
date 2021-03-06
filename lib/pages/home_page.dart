@@ -35,7 +35,7 @@ class _HomePageBody extends StatelessWidget {
     final playerProvider = Provider.of<PlayerProvider>(context, listen: false);
     playerProvider.getAllPlayers();
     final matchProvider = Provider.of<MatchProvider>(context, listen: false);
-    matchProvider.getAllMatches();
+    matchProvider.getMatchesResult();
 
     switch (_selectedTabIndex) {
       case 0:

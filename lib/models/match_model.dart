@@ -19,6 +19,7 @@ class Match {
     this.teamBFirstSet,
     this.teamBSecondSet,
     this.teamBThirdSet,
+    this.winningTeam,
     this.tournament,
     this.effort,
     this.comments,
@@ -41,6 +42,7 @@ class Match {
   int teamBFirstSet;
   int teamBSecondSet;
   int teamBThirdSet;
+  String winningTeam;
   int tournament;
   int effort;
   String comments;
@@ -63,6 +65,7 @@ class Match {
       teamBFirstSet: json["teamB_first_set"],
       teamBSecondSet: json["teamB_second_set"],
       teamBThirdSet: json["teamB_third_set"],
+      winningTeam: json["winning_team"],
       tournament: json["tournament"],
       effort: json["effort"],
       comments: json["comments"],
@@ -85,6 +88,7 @@ class Match {
         "teamB_first_set": teamBFirstSet,
         "teamB_second_set": teamBSecondSet,
         "teamB_third_set": teamBThirdSet,
+        "winning_team": winningTeam,
         "tournament": tournament,
         "effort": effort,
         "comments": comments,
